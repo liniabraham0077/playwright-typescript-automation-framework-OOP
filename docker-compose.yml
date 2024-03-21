@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  sportsbet-automated-tests:
+    image: sportsbet-automated-tests
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    command: npm run test
+    volumes:
+      - ./playwright-report/:/app/playwright-report
+
+

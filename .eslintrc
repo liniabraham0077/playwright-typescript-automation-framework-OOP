@@ -1,0 +1,66 @@
+{
+  "root": true,
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "browser": true,
+    "es2022": true
+  },
+  "extends": [
+    "xo",
+    "xo-typescript",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "plugin:prettier/recommended"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["@typescript-eslint",
+    "prettier"],
+  "rules": {
+    // Custom rules or overrides go here
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/object-curly-spacing": "off",
+    "@typescript-eslint/no-floating-promises": "error",
+    "@typescript-eslint/no-var-requires": "error",
+    "@typescript-eslint/promise-function-async": "error",
+    "@typescript-eslint/consistent-type-definitions": ["error", "type"],
+    "@typescript-eslint/require-await": "error",
+    "@typescript-eslint/semi": ["error", "always"],
+    "@typescript-eslint/type-annotation-spacing": "error",
+    "arrow-parens": ["error", "always"],
+    "comma-dangle": "error",
+    "eol-last": "error",
+    "import/np-default-export": "off",
+    "linebreak-style": "off",
+    "max-len": "off",
+    "new-parens": "error",
+    "newline-per-chained-call": "error",
+    "no-console": "off",
+    "no-duplicate-imports": "error",
+    "no-extra-semi": "error",
+    "no-irregular-whitespace": "error",
+    "no-multiple-empty-lines": "error",
+    "no-return-await": "error",
+    "no-trailing-spaces": "error",
+    "no-unused-expressions": "error",
+    "no-await-in-loop": "off",
+    "new-line-per-chained-call": "off",
+    "padded-blocks": [
+      "error",
+      {
+        "blocks": "never",
+      },
+      {
+        "allowSingleLineBlocks": true,
+      },
+    ],
+    "space-before-function-paren": "off",
+    "space-in-parens": ["error", "never"],
+    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }],
+  }
+}
