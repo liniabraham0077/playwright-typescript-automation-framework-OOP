@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test';
 import * as dotenv from 'dotenv';
+import { pageUtils } from './tests/utils/page-utils';
 
 /**
  * Read environment variables from file.
@@ -49,7 +50,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Chrome'],
         viewport: { width: parseInt(process.env.SCREEN_WIDTH!), height: parseInt(process.env.SCREEN_HEIGHT!) },
-        headless: false,
+        headless: pageUtils().parseStringToBoolean(process.env.HEADLESS!),
         ignoreHTTPSErrors: true,
         acceptDownloads: true,
       },
@@ -58,12 +59,25 @@ export default defineConfig({
 
     {
       name: 'firefox',
-      use: { ...devices['Desktop Firefox'] },
+      use: {
+        ...devices['Desktop Firefox'],
+        viewport: { width: parseInt(process.env.SCREEN_WIDTH!), height: parseInt(process.env.SCREEN_HEIGHT!) },
+        headless: pageUtils().parseStringToBoolean(process.env.HEADLESS!),
+        ignoreHTTPSErrors: true,
+        acceptDownloads: true,
+      },
+      grep: new RegExp(process.env.TAGS!),
     },
 
     {
       name: 'webkit',
-      use: { ...devices['Desktop Safari'] },
+      use: {
+        ...devices['Desktop Safari'],
+        viewport: { width: parseInt(process.env.SCREEN_WIDTH!), height: parseInt(process.env.SCREEN_HEIGHT!) },
+        headless: pageUtils().parseStringToBoolean(process.env.HEADLESS!),
+        ignoreHTTPSErrors: true,
+        acceptDownloads: true,
+      },
     },
 
     /* Test against mobile viewports. */

@@ -6,5 +6,5 @@ npm install
 npx playwright install
 npm run lint
 echo "********** Test Execution Started ********** "
-npm run test
+npm run test:chrome
 echo "********** Test Execution Finished ********** "

@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext .ts . --fix",
-    "test": "playwright test --project='chromium' ",
-    "open:allureReport": "allure open"
+    "test:chrome": "playwright test --project='chromium' ",
+    "open:allureReport": "allure open",
+    "open:playwrightReport": "playwright show-report "
   },
   "keywords": [],
   "author": "",

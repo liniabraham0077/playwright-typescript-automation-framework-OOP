@@ -29,8 +29,13 @@ export const pageUtils = () => {
     return Array.from(uniqueNumbers).sort((numberOne, numberTwo) => numberOne - numberTwo);
   }
 
+  function parseStringToBoolean(value: string): boolean {
+    return value.toLowerCase() === 'true' || value === '1';
+  }
+
   return {
     navigateTo: async (page: Page, hostname: string, path: string) => navigateTo(page, hostname, path),
     generateListOfUniqueRandomNumbers: (min: number, max: number, count: number): number[] => generateListOfUniqueRandomNumbers(min, max, count),
+    parseStringToBoolean: (value: string): boolean => parseStringToBoolean(value)
   };
 };
