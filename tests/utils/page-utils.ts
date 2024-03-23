@@ -7,6 +7,7 @@ export const pageUtils = () => {
 
   const navigateTo = async (page: Page, hostname: string, path: string) => {
     const url = hostname + path;
+    console.log(`url is ${url}`);
     await page.goto(url);
     await page.waitForLoadState('domcontentloaded');
   };
@@ -25,7 +26,7 @@ export const pageUtils = () => {
       uniqueNumbers.add(randomNumber);
     }
 
-    return Array.from(uniqueNumbers).sort();
+    return Array.from(uniqueNumbers).sort((numberOne, numberTwo) => numberOne - numberTwo);
   }
 
   return {

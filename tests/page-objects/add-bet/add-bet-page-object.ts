@@ -1,6 +1,6 @@
 /** Locators for add bet page */
 export const addBetPageObject = {
-  raceCardTitle() {
+  raceCardTitle(): string {
     return '[data-automation-id="contextual-nav-title-select"] > h1';
   },
   // prettier-ignore
