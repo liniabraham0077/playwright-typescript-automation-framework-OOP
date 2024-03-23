@@ -7,7 +7,7 @@ Coding challenge for SportsBet Web Application
 * Ensure that node and java are installed on your machine
 * node version 20
 * java jdk (11 or above) for allure report
-* Docker needs to be installed on the machine if tests needs to be executed via docker
+* Docker needs to be installed on the machine if tests need to be executed via docker
 
 ## Clone the repository from Github
 
