@@ -27,9 +27,17 @@ npm install
 npx playwright install
 ```
 
-#### Run tests
+#### Run tests in chrome
 
-npm run test
+npm run test:chrome
+
+#### Open allure report
+npm run open:allureReport
+
+#### Open playwright report
+npm run open:playwrightReport
+
+#### Run tests in chrome
 
 ### build docker image from dockerfile
 
@@ -54,6 +62,7 @@ Comparing added bets with bets in play slip - fixed it by replacing &nbsp charac
 
 In order to avoid large page files, i have separated page objects and page functions in to different files to make it more simple
 Handling dynamic UI and maintaining large number of tests
+UI elements appear to change with different screen sizes. Test scripts need to be updated to handle different screen resolutions.
 
 ## 4. Improvement areas
 
@@ -77,4 +86,7 @@ Docker set up is done to run tests on docker container
 Linting and prettier setup - for improving code quality and easy maintenance eslint and prettier are added
 husky for pre-commit checks
 shell script - run-palwright-tests.sh for executing tests via shell script. Arguments can be passed while exeucuting based on the requirement
+cross browser testing with the required browser , browsername can be parameterised as well
+Parallel testing can be achieved by increasing the number of workers
+Reporting using playwright html report and custom report using allure report
 
