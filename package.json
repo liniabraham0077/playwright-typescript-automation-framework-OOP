@@ -9,7 +9,13 @@
     "open:allureReport": "allure open",
     "open:playwrightReport": "playwright show-report ",
     "test:docker": "docker-compose up --build --force-recreate",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint-staged": "lint-staged"
+  },
+  "lint-staged": {
+    "tests/**/*.ts": [
+      "eslint --fix"
+    ]
   },
   "keywords": [],
   "author": "",
