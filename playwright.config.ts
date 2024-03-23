@@ -14,18 +14,18 @@ export default defineConfig({
   globalSetup: './tests/utils/global-setup.ts',
   globalTeardown: './tests/utils/global-teardown.ts',
   testDir: './tests',
-  timeout: 120000,
+  timeout: 60000,
   expect: {
-    timeout: 10 * 1000,
+    timeout: 5 * 1000,
   },
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: Boolean(process.env.CI),
   /* Retry on CI only */
-  retries: process.env.CI ? 2 : 0,
+  retries: process.env.CI ? 2 : 1,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : 3,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [['html'], ['allure-playwright']],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
@@ -48,12 +48,11 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        viewport: { width: 420, height: 720 },
+        viewport: { width: parseInt(process.env.SCREEN_WIDTH!), height: parseInt(process.env.SCREEN_HEIGHT!) },
         headless: false,
         ignoreHTTPSErrors: true,
         acceptDownloads: true,
       },
-      // testMatch: 'add-bet.spec.ts',
       grep: new RegExp(process.env.TAGS!),
     },
 

@@ -1,0 +1,2 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"failed","Thu Mar 21 23:34:03 GMT 2024","Thu Mar 21 23:34:04 GMT 2024","811","chromium","specs/add-bet.spec.ts","Verify add bets feature using a device width of 420 px","","","@addBets add two unique bets and verify if added correctly",""

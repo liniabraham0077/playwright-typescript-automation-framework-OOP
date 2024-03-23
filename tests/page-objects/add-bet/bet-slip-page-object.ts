@@ -5,4 +5,5 @@ export const betSlipPageObject = {
   betSlipCloseButton: '[data-automation-id= "betslip-header-hide"]',
   betSlipButton: '[data-automation-id="header-betslip-touchable"]',
   betSlipBetTitleList: 'div[class^="betInfo"] > [data-automation-id="betslip-bet-title"]',
+  betCount: '[data-automation-id="header-bet-count"]',
 };
