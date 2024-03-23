@@ -9,8 +9,6 @@ Coding challenge for SportsBet Web Application
 * java jdk (11 or above) for allure report
 * Docker needs to be installed on the machine if tests needs to be executed via docker
 
-### Installation
-
 ## Clone the repository from Github
 
 git clone https://github.com/liniabraham0077/sportsbet-coding-challenge.git
@@ -28,19 +26,17 @@ npm install
 npx playwright install
 ```
 
-#### Run tests in chrome
+## Run tests in chrome
 
 npm run test:chrome
 
-#### Open allure report
+## Open allure report
 npm run open:allureReport
 
-#### Open playwright report
+## Open playwright report
 npm run open:playwrightReport
 
-#### Run tests in chrome
-
-### build docker image from dockerfile
+## build docker image from dockerfile
 
 docker build -t sportsbet-automated-tests .
 
@@ -73,7 +69,7 @@ implement ci/cd
 * Allure report works for local execution but code needs to be updated for Docker execution
 
 
-##Framework Features
+## Framework Features
 
 Implemented using page object modal using Playwright , typescript
 Folder structure:
