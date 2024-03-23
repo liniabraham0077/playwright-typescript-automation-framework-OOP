@@ -7,7 +7,8 @@
     "lint": "eslint --ignore-path .eslintignore --ext .ts . --fix",
     "test:chrome": "playwright test --project='chromium' ",
     "open:allureReport": "allure open",
-    "open:playwrightReport": "playwright show-report "
+    "open:playwrightReport": "playwright show-report ",
+    "test:docker": "docker-compose up --build --force-recreate"
   },
   "keywords": [],
   "author": "",
