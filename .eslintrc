@@ -35,11 +35,9 @@
     "arrow-parens": ["error", "always"],
     "comma-dangle": "error",
     "eol-last": "error",
-    "import/np-default-export": "off",
     "linebreak-style": "off",
     "max-len": "off",
     "new-parens": "error",
-    "newline-per-chained-call": "error",
     "no-console": "off",
     "no-duplicate-imports": "error",
     "no-extra-semi": "error",
@@ -48,19 +46,18 @@
     "no-return-await": "error",
     "no-trailing-spaces": "error",
     "no-unused-expressions": "error",
-    "no-await-in-loop": "off",
+    "no-await-in-loop": "error",
     "new-line-per-chained-call": "off",
     "padded-blocks": [
       "error",
       {
-        "blocks": "never",
+        "blocks": "never"
       },
       {
-        "allowSingleLineBlocks": true,
-      },
+        "allowSingleLineBlocks": true
+      }
     ],
-    "space-before-function-paren": "off",
     "space-in-parens": ["error", "never"],
-    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }],
+    "spaced-comment": ["error", "always", { "exceptions": ["-", "+"] }]
   }
 }
