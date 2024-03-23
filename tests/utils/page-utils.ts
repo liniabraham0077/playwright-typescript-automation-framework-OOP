@@ -36,6 +36,6 @@ export const pageUtils = () => {
   return {
     navigateTo: async (page: Page, hostname: string, path: string) => navigateTo(page, hostname, path),
     generateListOfUniqueRandomNumbers: (min: number, max: number, count: number): number[] => generateListOfUniqueRandomNumbers(min, max, count),
-    parseStringToBoolean: (value: string): boolean => parseStringToBoolean(value)
+    parseStringToBoolean: (value: string): boolean => parseStringToBoolean(value),
   };
 };

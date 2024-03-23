@@ -25,7 +25,9 @@ export const addBetPage = () => {
   /** Function to add two unique race card outcomes and verify the name against bet slip name */
 
   const generateRandomRaceCardIndexToAdd = async (page: Page, raceCardOutcomeToAddCount: number) => {
-    await page.locator(addBetPageObject.raceCardOutcomeWinList).first().waitFor({ state: 'visible' });
+    // prettier-ignore
+    await page.locator(addBetPageObject.raceCardOutcomeWinList).first()
+    .waitFor({ state: 'visible' });
     const raceCardOutcomeAvailableCount = await page.locator(addBetPageObject.raceCardOutcomeWinList).count();
     const raceCardNumberToAddList = pageUtils().generateListOfUniqueRandomNumbers(1, raceCardOutcomeAvailableCount, raceCardOutcomeToAddCount);
     return raceCardNumberToAddList;
@@ -92,8 +94,10 @@ export const addBetPage = () => {
     await page.locator(betSlipPageObject.betSlipButton).click();
     const betTitleCount = await page.locator(betSlipPageObject.betSlipBetTitleList).count();
     expect(betTitleCount).toEqual(raceCardOutcomeToAddCount);
-    const betCountOnBetSlip = (await page.locator(betSlipPageObject.betCount).first().textContent()) as string;
-    expect(parseInt(betCountOnBetSlip)).toEqual(raceCardOutcomeToAddCount);
+    // prettier-ignore
+    const betCountOnBetSlip = (await page.locator(betSlipPageObject.betCount).first()
+.textContent())!;
+    expect(parseInt(betCountOnBetSlip, 10)).toEqual(raceCardOutcomeToAddCount);
   };
 
   return {
