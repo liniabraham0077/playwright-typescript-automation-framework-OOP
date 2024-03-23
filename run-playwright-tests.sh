@@ -8,3 +8,5 @@ npm run lint
 echo "********** Test Execution Started ********** "
 npm run test:chrome
 echo "********** Test Execution Finished ********** "
+echo "********** Opening Allure Report ********** "
+npm run open:allureReport
