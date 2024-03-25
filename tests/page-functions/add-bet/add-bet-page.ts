@@ -52,7 +52,6 @@ export const addBetPage = () => {
       raceCardNumberList.map(async (raceCardNumber) => {
         console.log(`adding race card number ${raceCardNumber}`);
         await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).scrollIntoViewIfNeeded();
-        await page.waitForSelector(addBetPageObject.raceCardToAdd(raceCardNumber), { state: 'visible' });
         await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).waitFor({ state: 'visible' });
         await expect(page.locator(addBetPageObject.raceCardToAdd(raceCardNumber))).toBeVisible();
         if (await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).isVisible()) {
