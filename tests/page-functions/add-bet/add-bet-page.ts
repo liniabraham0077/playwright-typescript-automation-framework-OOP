@@ -25,9 +25,7 @@ export const addBetPage = () => {
   /** Function to add two unique race card outcomes and verify the name against bet slip name */
 
   const generateRandomRaceCardIndexToAdd = async (page: Page, raceCardOutcomeToAddCount: number) => {
-    // prettier-ignore
-    await page.locator(addBetPageObject.raceCardOutcomeWinList).first()
-    .waitFor({ state: 'visible' });
+    await page.locator(addBetPageObject.raceCardOutcomeWinList).first().waitFor({ state: 'visible' });
     const raceCardOutcomeAvailableCount = await page.locator(addBetPageObject.raceCardOutcomeWinList).count();
     const raceCardNumberToAddList = pageUtils().generateListOfUniqueRandomNumbers(1, raceCardOutcomeAvailableCount, raceCardOutcomeToAddCount);
     return raceCardNumberToAddList;
@@ -51,19 +49,23 @@ export const addBetPage = () => {
     await Promise.all(
       raceCardNumberList.map(async (raceCardNumber) => {
         console.log(`adding race card number ${raceCardNumber}`);
-        await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).scrollIntoViewIfNeeded();
-        await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).waitFor({ state: 'visible' });
-        await expect(page.locator(addBetPageObject.raceCardToAdd(raceCardNumber))).toBeVisible();
-        if (await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).isVisible()) {
-          await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).click();
-          console.log(`added race card number ${raceCardNumber}`);
-        } else throw new Error(`racecard number to be added ${raceCardNumber} is not visible`);
-        if (await page.locator(betSlipPageObject.betSlipPanel).isVisible()) {
+
+        const raceCardLocator = page.locator(addBetPageObject.raceCardToAdd(raceCardNumber));
+        await raceCardLocator.scrollIntoViewIfNeeded();
+        await raceCardLocator.waitFor({ state: 'visible' });
+        await expect(raceCardLocator).toBeVisible();
+
+        await raceCardLocator.click();
+        console.log(`added race card number ${raceCardNumber}`);
+
+        const betSlipPanelLocator = page.locator(betSlipPageObject.betSlipPanel);
+        if (await betSlipPanelLocator.isVisible()) {
           await page.locator(betSlipPageObject.betSlipCloseButton).click();
         }
 
-        if (!(await page.locator(addBetPageObject.raceCardSelected(raceCardNumber)).isVisible())) {
-          await page.locator(addBetPageObject.raceCardToAdd(raceCardNumber)).click();
+        const raceCardSelectedLocator = page.locator(addBetPageObject.raceCardSelected(raceCardNumber));
+        if (!(await raceCardSelectedLocator.isVisible())) {
+          await raceCardLocator.click();
         }
       }),
     );
@@ -94,9 +96,7 @@ export const addBetPage = () => {
     await page.locator(betSlipPageObject.betSlipButton).click();
     const betTitleCount = await page.locator(betSlipPageObject.betSlipBetTitleList).count();
     expect(betTitleCount).toEqual(raceCardOutcomeToAddCount);
-    // prettier-ignore
-    const betCountOnBetSlip = (await page.locator(betSlipPageObject.betCount).first()
-.textContent())!;
+    const betCountOnBetSlip = (await page.locator(betSlipPageObject.betCount).first().textContent())!;
     expect(parseInt(betCountOnBetSlip, 10)).toEqual(raceCardOutcomeToAddCount);
   };
 
