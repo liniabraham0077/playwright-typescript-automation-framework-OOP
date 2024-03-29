@@ -3,12 +3,10 @@ export const addBetPageObject = {
   raceCardTitle(): string {
     return '[data-automation-id="contextual-nav-title-select"] > h1';
   },
-  // prettier-ignore
   raceCardToAdd(raceCardNumber: number): string {
-        return '(//div[@data-automation-id="racecard-outcome-0-L-price"])[' + raceCardNumber + ']//div[@data-automation-id="racecard-price-button-deselected"]';
+    return '(//div[@data-automation-id="racecard-outcome-0-L-price"])[' + raceCardNumber + ']//div[@data-automation-id="racecard-price-button-deselected"]';
   },
 
-  // prettier-ignore
   raceCardSelected(raceCardNumber: number): string {
     return '(//div[@data-automation-id="racecard-outcome-0-L-price"])[' + raceCardNumber + ']//div[@data-automation-id="racecard-price-button-selected"]';
   },

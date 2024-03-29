@@ -14,9 +14,7 @@ export const homePage = () => {
 
   const selectRaceCardFromGroupOne = async (page: Page, horseNumber: number) => {
     await expect(page.locator(homePageObject.getCarouselCellTitle(1, 1)).first()).toBeVisible();
-    // prettier-ignore
-    const carouselCellText = await page.locator(homePageObject.getCarouselCellTitle(1, 1)).first()
-.textContent();
+    const carouselCellText = await page.locator(homePageObject.getCarouselCellTitle(1, 1)).first().textContent();
     await page.locator(homePageObject.getNthHorse(horseNumber)).click();
     return carouselCellText;
   };
