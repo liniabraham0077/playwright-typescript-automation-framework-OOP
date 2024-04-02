@@ -6,27 +6,11 @@ export class HomePage {
     this.page = page;
   }
 
-  get sportsBetLogo(): Locator {
-    return this.page.getByTestId('sportsbet-logo');
-  }
-
-  getGroupCarousel(group: number, carousel: number): Locator {
-    return this.page.locator(`[data-automation-id="group-${group}-carousel-${carousel}-header-title"]`);
-  }
-
-  getNthHorse(horseNumber: number): Locator {
-    return this.page.locator(`[data-automation-id="group-1-carousel-1-body-container-cell-${horseNumber}"]`);
-  }
-
-  getCarouselCellTitle(carousel: number, cell: number): Locator {
-    return this.page.locator(`[data-automation-id="carousel-${carousel}-cell-${cell}-event-title"]`);
-  }
-
   /** Function to navigate to sportsbet home page */
-  async navigateToHomePage(): Promise<void> {
+  public async navigateToHomePage(): Promise<void> {
     await PageUtils.navigateTo(this.page, process.env.HOSTNAME!, '/');
     await expect(this.page).toHaveTitle(/^Best Online Horse Racing \w+ Sports Betting | Sportsbet$/);
-    await expect(this.sportsBetLogo).toBeVisible();
+    await expect(this.sportsBetLogo()).toBeVisible();
   }
 
   /** Function to select first race card from sportsbet home page */
@@ -37,4 +21,11 @@ export class HomePage {
     await this.getNthHorse(horseNumber).click();
     return carouselCellText;
   };
+
+  private readonly sportsBetLogo = (): Locator => this.page.getByTestId('sportsbet-logo');
+  private readonly getGroupCarousel = (group: number, carousel: number): Locator => this.page.locator(`[data-automation-id="group-${group}-carousel-${carousel}-header-title"]`);
+
+  private readonly getNthHorse = (horseNumber: number): Locator => this.page.locator(`[data-automation-id="group-1-carousel-1-body-container-cell-${horseNumber}"]`);
+
+  private readonly getCarouselCellTitle = (carousel: number, cell: number): Locator => this.page.locator(`[data-automation-id="carousel-${carousel}-cell-${cell}-event-title"]`);
 }

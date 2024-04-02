@@ -10,5 +10,7 @@ services:
     command: npm run test:chrome
     volumes:
       - ./playwright-report/:/app/playwright-report
+      - ./allure-report/:/app/allure-report
+      - ./allure-results/:/app/allure-results
 
 

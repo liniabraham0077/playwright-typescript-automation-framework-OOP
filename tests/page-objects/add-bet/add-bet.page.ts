@@ -6,50 +6,10 @@ export class AddBetPage {
     this.page = page;
   }
 
-  get raceCardTitle(): Locator {
-    return this.page.locator('[data-automation-id="contextual-nav-title-select"] > h1');
-  }
-
-  raceCardToAdd(raceCardNumber: number): Locator {
-    return this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-deselected"]`);
-  }
-
-  raceCardSelected(raceCardNumber: number): Locator {
-    return this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-selected"]`);
-  }
-
-  get raceCardOutcomeWinList(): Locator {
-    return this.page.locator('//div[@data-automation-id="racecard-outcome-0-L-price"]');
-  }
-
-  raceCardOutcomeList(raceCardNumber: number): Locator {
-    return this.page.locator(`(//div[@data-automation-id="racecard-outcome-name"])[${raceCardNumber}]`);
-  }
-
-  get betSlipPanel(): Locator {
-    return this.page.getByTestId('layout-right-panel');
-  }
-
-  get betSlipCloseButton(): Locator {
-    return this.page.getByTestId('betslip-header-hide');
-  }
-
-  get betSlipButton(): Locator {
-    return this.page.getByTestId('header-betslip-touchable');
-  }
-
-  get betSlipBetTitleList(): Locator {
-    return this.page.getByTestId('betslip-bet-title');
-  }
-
-  get betCount(): Locator {
-    return this.page.getByTestId('header-bet-count');
-  }
-
   /** Function to compare race card name from home page and add bet page */
 
   async verifySelectedRaceCard(selectedRaceCard: string): Promise<void> {
-    const displayedRaceCard = await this.raceCardTitle.textContent();
+    const displayedRaceCard = await this.raceCardTitle().textContent();
     console.log(`add bet page horse ${displayedRaceCard}`);
 
     expect(displayedRaceCard).toEqual(selectedRaceCard);
@@ -67,8 +27,8 @@ export class AddBetPage {
   /** Function to add two unique race card outcomes and verify the name against bet slip name */
 
   async generateRandomRaceCardIndexToAdd(raceCardOutcomeToAddCount: number) {
-    await this.raceCardOutcomeWinList.first().waitFor({ state: 'visible' });
-    const raceCardOutcomeAvailableCount = await this.raceCardOutcomeWinList.count();
+    await this.raceCardOutcomeWinList().first().waitFor({ state: 'visible' });
+    const raceCardOutcomeAvailableCount = await this.raceCardOutcomeWinList().count();
     const raceCardNumberToAddList = PageUtils.generateListOfUniqueRandomNumbers(1, raceCardOutcomeAvailableCount, raceCardOutcomeToAddCount);
     return raceCardNumberToAddList;
   }
@@ -99,8 +59,8 @@ export class AddBetPage {
           await raceCardNumberToAdd.click();
           console.log(`added race card number ${raceCardNumber}`);
         } else throw new Error(`racecard number to be added ${raceCardNumber} is not visible`);
-        if (await this.betSlipPanel.isVisible()) {
-          await this.betSlipCloseButton.click();
+        if (await this.betSlipPanel().isVisible()) {
+          await this.betSlipCloseButton().click();
         }
 
         if (!(await this.raceCardSelected(raceCardNumber).isVisible())) {
@@ -113,10 +73,10 @@ export class AddBetPage {
   /** Function to compare the added race card otucome against bet slip names */
 
   async verifyAddedRaceCardsInBetSlip(randomRaceCardsToAddNameList: string[]): Promise<void> {
-    await this.betSlipButton.click();
-    const betcount = await this.betSlipBetTitleList.count();
+    await this.betSlipButton().click();
+    const betcount = await this.betSlipBetTitleList().count();
     console.log(`betCount is ${betcount}`);
-    const randomRaceCardsAddedNameList = await this.betSlipBetTitleList.allTextContents();
+    const randomRaceCardsAddedNameList = await this.betSlipBetTitleList().allTextContents();
     console.log('bets to add ', randomRaceCardsToAddNameList);
     console.log('bets added ', randomRaceCardsAddedNameList);
     expect([...randomRaceCardsAddedNameList].sort()).toEqual([...randomRaceCardsToAddNameList].sort());
@@ -132,10 +92,21 @@ export class AddBetPage {
   /** Function to verify bet count on bet slip */
 
   async verifyBetCount(raceCardOutcomeToAddCount: number): Promise<void> {
-    await this.betSlipButton.click();
-    const betTitleCount = await this.betSlipBetTitleList.count();
+    await this.betSlipButton().click();
+    const betTitleCount = await this.betSlipBetTitleList().count();
     expect(betTitleCount).toEqual(raceCardOutcomeToAddCount);
-    const betCountOnBetSlip = (await this.betCount.first().textContent())!;
+    const betCountOnBetSlip = (await this.betCount().first().textContent())!;
     expect(parseInt(betCountOnBetSlip, 10)).toEqual(raceCardOutcomeToAddCount);
   }
+
+  private readonly raceCardTitle = (): Locator => this.page.locator('[data-automation-id="contextual-nav-title-select"] > h1');
+  private readonly raceCardToAdd = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-deselected"]`);
+  private readonly raceCardSelected = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-selected"]`);
+  private readonly raceCardOutcomeWinList = (): Locator => this.page.locator('//div[@data-automation-id="racecard-outcome-0-L-price"]');
+  private readonly raceCardOutcomeList = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-name"])[${raceCardNumber}]`);
+  private readonly betSlipPanel = (): Locator => this.page.getByTestId('layout-right-panel');
+  private readonly betSlipCloseButton = (): Locator => this.page.getByTestId('betslip-header-hide');
+  private readonly betSlipButton = (): Locator => this.page.getByTestId('header-betslip-touchable');
+  private readonly betSlipBetTitleList = (): Locator => this.page.getByTestId('betslip-bet-title');
+  private readonly betCount = (): Locator => this.page.getByTestId('header-bet-count');
 }
