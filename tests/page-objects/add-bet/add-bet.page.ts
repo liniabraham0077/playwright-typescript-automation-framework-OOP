@@ -6,6 +6,18 @@ export class AddBetPage {
     this.page = page;
   }
 
+  readonly raceCardTitle = (): Locator => this.page.locator('[data-automation-id="contextual-nav-title-select"] > h1');
+  readonly raceCardToAdd = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-deselected"]`);
+  readonly raceCardToAdd0 = (raceCardNumber: number): Locator => this.page.locator(`div[data-automation-id="racecard-outcome-0-L-price"]:nth-child(${raceCardNumber}) div[data-automation-id="racecard-price-button-deselected"]`);
+  readonly raceCardSelected = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-selected"]`);
+  readonly raceCardOutcomeWinList = (): Locator => this.page.locator('//div[@data-automation-id="racecard-outcome-0-L-price"]');
+  readonly raceCardOutcomeList = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-name"])[${raceCardNumber}]`);
+  readonly betSlipPanel = (): Locator => this.page.getByTestId('layout-right-panel');
+  readonly betSlipCloseButton = (): Locator => this.page.getByTestId('betslip-header-hide');
+  readonly betSlipButton = (): Locator => this.page.getByTestId('header-betslip-touchable');
+  readonly betSlipBetTitleList = (): Locator => this.page.getByTestId('betslip-bet-title');
+  readonly betCount = (): Locator => this.page.getByTestId('header-bet-count');
+
   /** Function to compare race card name from home page and add bet page */
 
   async verifySelectedRaceCard(selectedRaceCard: string): Promise<void> {
@@ -98,15 +110,4 @@ export class AddBetPage {
     const betCountOnBetSlip = (await this.betCount().first().textContent())!;
     expect(parseInt(betCountOnBetSlip, 10)).toEqual(raceCardOutcomeToAddCount);
   }
-
-  private readonly raceCardTitle = (): Locator => this.page.locator('[data-automation-id="contextual-nav-title-select"] > h1');
-  private readonly raceCardToAdd = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-deselected"]`);
-  private readonly raceCardSelected = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-0-L-price"])[${raceCardNumber}]//div[@data-automation-id="racecard-price-button-selected"]`);
-  private readonly raceCardOutcomeWinList = (): Locator => this.page.locator('//div[@data-automation-id="racecard-outcome-0-L-price"]');
-  private readonly raceCardOutcomeList = (raceCardNumber: number): Locator => this.page.locator(`(//div[@data-automation-id="racecard-outcome-name"])[${raceCardNumber}]`);
-  private readonly betSlipPanel = (): Locator => this.page.getByTestId('layout-right-panel');
-  private readonly betSlipCloseButton = (): Locator => this.page.getByTestId('betslip-header-hide');
-  private readonly betSlipButton = (): Locator => this.page.getByTestId('header-betslip-touchable');
-  private readonly betSlipBetTitleList = (): Locator => this.page.getByTestId('betslip-bet-title');
-  private readonly betCount = (): Locator => this.page.getByTestId('header-bet-count');
 }

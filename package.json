@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint --ignore-path .eslintignore --ext .ts . --fix",
-    "test:chrome": "playwright test --project='chromium' ",
+    "test:chrome": "playwright test --project='chromium' --ui ",
     "open:allureReport": "allure open",
     "open:playwrightReport": "playwright show-report ",
     "test:docker": "docker-compose up --build --force-recreate",
@@ -26,6 +26,7 @@
     "@types/node": "^20.11.28",
     "allure-commandline": "^2.27.0",
     "allure-playwright": "^2.15.0",
+    "axe-playwright": "^2.0.1",
     "dotenv": "^16.4.5",
     "env-cmd": "^10.1.0",
     "eslint": "^8.57.0",
@@ -40,5 +41,8 @@
   },
   "engines": {
     "node": "^20"
+  },
+  "dependencies": {
+    "@axe-core/playwright": "^4.9.0"
   }
 }
