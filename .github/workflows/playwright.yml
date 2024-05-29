@@ -18,4 +18,4 @@ jobs:
           echo "Install dependencies from lockfile"
           npm ci
           echo "Run playwright tests"
-          npm run test:chrome
+          npm run test:docker
